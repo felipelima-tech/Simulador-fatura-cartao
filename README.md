@@ -1,5 +1,5 @@
 # simulador-fatura-cartao
-Este projeto foi inspirado em uma sugestão feita por um cliente durante um atendimento real em uma empresa do setor de cartões de crédito. A partir dessa necessidade, desenvolvi uma solução que simula análises financeiras e regras de negócio encontradas em instituições financeiras.
+# Este projeto foi inspirado em uma sugestão feita por um cliente durante um atendimento real em uma empresa do setor de cartões de crédito. A partir dessa necessidade, desenvolvi uma solução que simula análises financeiras e regras de negócio encontradas em instituições financeiras.
 
 Durante o atendimento, surgiu a necessidade de visualizar de forma clara como uma fatura evoluiria em caso de atraso, incluindo os juros aplicados, o valor atualizado da dívida e outras informações que auxiliariam o cliente na tomada de decisão.
 
