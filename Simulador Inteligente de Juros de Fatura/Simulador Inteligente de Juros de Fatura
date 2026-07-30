@@ -1,0 +1,153 @@
+from time import sleep
+from random import choice
+
+print('-=-' * 10)
+print('      CADASTRO DO CLIENTE    ')
+print('-=-' * 10)
+
+nome = str(input('Nome completo: '))
+
+idade = int(input('Idade: '))
+
+cidade = str(input('Cidade: '))
+
+profissão = str(input('Profissão: '))
+
+renda_mensal = float(input('Renda mensal: '))
+#------------------------------------------------ CADASTRO DO CLIENTE
+
+banco_emissor = str(input('Banco emissor: '))
+
+limite_cartão = float(input('Limite total do cartão: '))
+
+while True: 
+
+        valor_fatura = float(input('Valor da fatura: '))
+
+        questionamento = str(input('Ja fez pagamento parcial ?'))
+
+        if questionamento.lower().strip() == 'sim':
+            valor_pago = float(input('Valor já pago: '))
+            
+        else:
+            valor_pago = 0
+            
+        if valor_pago <= valor_fatura:
+            saldo_restante = valor_fatura - valor_pago
+            break
+        else:
+            print('Valor inválido')
+
+    #-----------------------------------DADOS DA FATURA
+
+valor_utilizado = (valor_fatura/ limite_cartão) * 100
+
+if valor_utilizado <= 30:
+    print('Utilização baixa')
+elif valor_utilizado >= 31 and valor_utilizado <= 70:
+    print('Utilização moderada')
+elif valor_utilizado > 70 and valor_utilizado <= 99:
+    print('Utilização elevada')
+elif valor_utilizado == 100:
+    print('''ATENÇÃO !
+        O limite do cartão foi excedido''')
+
+#-------------------------------------------------------ANÁLISE DO LIMITE DO CARTÃO
+atraso = int(input('Dias em atraso: '))
+
+if atraso < 0:
+        print('Quantidade de dias inválida')
+        atraso = int(input('Dias em atraso: '))
+elif atraso == 0:
+    valor_fatura = valor_fatura
+elif atraso >= 1 and atraso <= 5:
+    valor_final = valor_fatura + (valor_fatura * 2 / 100)
+    juro = '2%'
+elif atraso >= 6 and atraso <= 15:
+    valor_final = valor_fatura + (valor_fatura * 5 / 100)
+    juro = '5%'
+elif atraso >= 16 and atraso <= 30:
+    valor_final = valor_fatura + (valor_fatura * 8 / 100) 
+    juro = '8%'
+else:
+    valor_final = valor_fatura + (valor_fatura * 12 / 100) 
+    juro = '12%'
+
+juros = valor_final - valor_fatura
+
+#--------------------------------------------------------------------------------
+
+if atraso == 0:
+     situação = ('Cliente regular')
+elif atraso >= 1 and atraso <= 10:
+     situação = ('Atraso leve')
+elif atraso >= 11 and atraso <= 30:
+    situação = ('ATENÇÃO')
+else:
+     situação = ('Alto risco de Inadimplência')
+#--------------------------------------- CLASSIFICAÇÃO DO CLIENTE
+
+comprometimento = (valor_fatura / renda_mensal) * 100
+
+if comprometimento == 20:
+     print('Comprometimento baixo')
+elif comprometimento >= 21 and comprometimento <= 40:
+     print('Comprometimento moderado')
+elif comprometimento >= 41 and comprometimento <= 60:
+     print('Comprometimento moderado')
+else:
+     print('''Situação crítica
+     Considere negociar sua dívida''')
+
+#-------------------------------------------Análise do Comprometimento da Renda
+
+beneficios = ["Cashback de 5%","Programa de Pontos","Aumento de Limite","Isenção de Anuidade","Parcelamento Especial"]
+
+if atraso == 0:
+    beneficio = choice(beneficios)
+else:
+     beneficio = ('Benefícios indisponíveis para clientes com fatura em atraso.')
+#----------------------------------------------------------------------Programa de Benefícios
+print('CARREGANDO...')
+sleep(2)
+print()
+print('=' * 30)
+print('         RELATÓRIO DA FATURA')
+print('=' * 30)
+
+print(f'Cliente:{nome}')
+print()
+print(f'Idade: {idade}')
+print()
+print(f'Cidade:{cidade}')
+print()
+print(f'Profissão: {profissão}')
+print()
+print(f'Banco emissor:{banco_emissor}')
+print()
+print(f'Limite do cartão:{limite_cartão}')
+print()
+print(f'Taxa aplicada:{juro}')
+print()
+print(f'Valor dos juros:{juros:.2f}')
+print()
+print(f'Valor da fatura:{valor_final:.2f}')
+print()
+if questionamento.lower().strip() == 'sim':
+  print(f'Valor pago:{valor_pago}')
+  print()
+  print(f'Saldo restante: R${saldo_restante}')
+print()
+print(f'Dias em atraso: {atraso}')
+print()
+print(f'Utilização do limite:{valor_utilizado:.2f}%')
+print()
+print(f'Comprometimento de renda: {comprometimento:.2f}%')
+print()
+
+print(f'Situação: {situação}')
+print()
+print(f'Benefício: {beneficio}')
+print()
+
+print('=' * 30)
