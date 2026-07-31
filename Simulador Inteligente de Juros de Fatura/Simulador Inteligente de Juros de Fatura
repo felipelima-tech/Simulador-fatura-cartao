@@ -36,21 +36,21 @@ while True:
             saldo_restante = valor_fatura - valor_pago
             break
         else:
-            print('Valor inválido')
+            print('\033[0;31m Valor inválido \033[m')
 
     #-----------------------------------DADOS DA FATURA
 
 valor_utilizado = (valor_fatura/ limite_cartão) * 100
 
 if valor_utilizado <= 30:
-    print('Utilização baixa')
+    print('\033[0;32m Utilização baixa \033[m')
 elif valor_utilizado >= 31 and valor_utilizado <= 70:
-    print('Utilização moderada')
+    print('\033[0;33m Utilização moderada \033[m')
 elif valor_utilizado > 70 and valor_utilizado <= 99:
-    print('Utilização elevada')
+    print('\033[0;31m Utilização elevada \033[m')
 elif valor_utilizado == 100:
-    print('''ATENÇÃO !
-        O limite do cartão foi excedido''')
+    print('''\033[1;31m ATENÇÃO !
+        O limite do cartão foi excedido \033[m''')
 
 #-------------------------------------------------------ANÁLISE DO LIMITE DO CARTÃO
 atraso = int(input('Dias em atraso: '))
@@ -58,19 +58,29 @@ atraso = int(input('Dias em atraso: '))
 if atraso < 0:
         print('Quantidade de dias inválida')
         atraso = int(input('Dias em atraso: '))
+
 elif atraso == 0:
-    valor_fatura = valor_fatura
+    valor_final = valor_fatura
+    juro = 'Sem juros'
+
 elif atraso >= 1 and atraso <= 5:
     valor_final = valor_fatura + (valor_fatura * 2 / 100)
+    saldo_restante = valor_fatura + (valor_fatura * 2 / 100)
     juro = '2%'
+
 elif atraso >= 6 and atraso <= 15:
     valor_final = valor_fatura + (valor_fatura * 5 / 100)
+    saldo_restante = valor_fatura + (valor_fatura * 5 / 100)
     juro = '5%'
+
 elif atraso >= 16 and atraso <= 30:
-    valor_final = valor_fatura + (valor_fatura * 8 / 100) 
+    valor_final = valor_fatura + (valor_fatura * 8 / 100)
+    saldo_restante = valor_fatura + (valor_fatura * 8 / 100)
     juro = '8%'
+
 else:
-    valor_final = valor_fatura + (valor_fatura * 12 / 100) 
+    valor_final = valor_fatura + (valor_fatura * 12 / 100)
+    saldo_restante = valor_fatura + (valor_fatura * 12 / 100)
     juro = '12%'
 
 juros = valor_final - valor_fatura
@@ -78,26 +88,26 @@ juros = valor_final - valor_fatura
 #--------------------------------------------------------------------------------
 
 if atraso == 0:
-     situação = ('Cliente regular')
+     situação = ('\033[0;32m Cliente regular \033[m')
 elif atraso >= 1 and atraso <= 10:
-     situação = ('Atraso leve')
+     situação = ('\033[0;33m Atraso leve \033[m')
 elif atraso >= 11 and atraso <= 30:
-    situação = ('ATENÇÃO')
+    situação = ('\033[0;31m ATENÇÃO \033[m')
 else:
-     situação = ('Alto risco de Inadimplência')
+     situação = ('\033[1;31m Alto risco de Inadimplência \033[m')
 #--------------------------------------- CLASSIFICAÇÃO DO CLIENTE
 
 comprometimento = (valor_fatura / renda_mensal) * 100
 
-if comprometimento == 20:
-     print('Comprometimento baixo')
+if comprometimento <= 20:
+     print('\033[0;32m Comprometimento baixo \033[m')
 elif comprometimento >= 21 and comprometimento <= 40:
-     print('Comprometimento moderado')
+     print('\033[0;33m Comprometimento moderado \033[m')
 elif comprometimento >= 41 and comprometimento <= 60:
-     print('Comprometimento moderado')
+     print('\033[0;33m Comprometimento moderado')
 else:
-     print('''Situação crítica
-     Considere negociar sua dívida''')
+     print('''\033[1;31m Situação crítica
+     Considere negociar sua dívida \033[m''')
 
 #-------------------------------------------Análise do Comprometimento da Renda
 
@@ -108,7 +118,7 @@ if atraso == 0:
 else:
      beneficio = ('Benefícios indisponíveis para clientes com fatura em atraso.')
 #----------------------------------------------------------------------Programa de Benefícios
-print('CARREGANDO...')
+print('\033[1;32mCARREGANDO...\033[m')
 sleep(2)
 print()
 print('=' * 30)
@@ -134,11 +144,11 @@ print()
 print(f'Valor da fatura:{valor_final:.2f}')
 print()
 if questionamento.lower().strip() == 'sim':
-  print(f'Valor pago:{valor_pago}')
+  print(f'Valor pago: \033[0;32m{valor_pago} \033[m')
   print()
-  print(f'Saldo restante: R${saldo_restante}')
+  print(f'Saldo restante: R$ \033[0;33m {saldo_restante} \033[m')
 print()
-print(f'Dias em atraso: {atraso}')
+print(f'Dias em atraso: \033[0;31m{atraso} \033[m')
 print()
 print(f'Utilização do limite:{valor_utilizado:.2f}%')
 print()
@@ -147,7 +157,10 @@ print()
 
 print(f'Situação: {situação}')
 print()
-print(f'Benefício: {beneficio}')
+if atraso == 0:
+    print(f'Benefício: \033[0;32m{beneficio} \033[m')
+else:
+     print(f'Benefício: \033[0;31m{beneficio} \033[m')
 print()
 
 print('=' * 30)
